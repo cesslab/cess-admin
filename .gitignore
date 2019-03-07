@@ -236,3 +236,4 @@ fabric.properties
 .idea/sonarlint
 
 # End of https://www.gitignore.io/api/macos,django,pycharm
+cadmin/.idea/workspace.xml
