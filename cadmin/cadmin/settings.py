@@ -125,4 +125,4 @@ STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'profiles.User'
 
-
+LOGIN_REDIRECT_URL = 'projects_home'
