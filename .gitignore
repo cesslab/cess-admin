@@ -237,3 +237,7 @@ fabric.properties
 
 # End of https://www.gitignore.io/api/macos,django,pycharm
 cadmin/.idea/workspace.xml
+cadmin/.idea/dataSources.local.xml
+cadmin/.idea/dataSources.local.xml
+cadmin/.idea/misc.xml
+cadmin/.idea/workspace.xml
