@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'profiles',
     'projects',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -126,3 +127,7 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'profiles.User'
 
 LOGIN_REDIRECT_URL = 'projects_home'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
