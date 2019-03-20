@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'profiles',
     'projects',
     'crispy_forms',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -131,3 +132,5 @@ LOGIN_REDIRECT_URL = 'projects_home'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+SHELL_PLUS = "ipython"
