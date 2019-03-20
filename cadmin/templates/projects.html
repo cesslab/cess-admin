@@ -6,4 +6,29 @@ Projects
 
 {% block content %}
 <h2>Projects</h2>
+    <main>
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Members</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in projects %}
+                <tr>
+                    <td>{{ p.name }}</td>
+                    <td>
+                        {% for u in p.users.all %}
+                            {{ u.first_name }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    </main>
 {% endblock %}
