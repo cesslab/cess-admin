@@ -22,9 +22,8 @@ from profiles.views import signup
 urlpatterns = [
     path('', home, name='home'),
     path('projects/', include('projects.urls'), name='projects'),
-    path('signup/', signup, name='signup'),
     path('admin/', admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls'))
+    path('accounts/', include('allauth.urls')),
 ]
 
 if settings.DEBUG:
