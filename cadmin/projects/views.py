@@ -13,14 +13,15 @@ def projects(request):
 @login_required
 def add_project(request):
     if request.method == 'POST':
-        form = ProjectForm(request.POST)
+        form = ProjectForm(request.POST, user=request.user)
         if form.is_valid():
+            # The project must be saved to the DB before adding the collaborator.
             project = form.save(commit=False)
             project.save()
-            project.users.add(request.user)
+            project.collaborators.add(request.user)
             project.save()
             return redirect('projects_home')
-    form = ProjectForm()
+    form = ProjectForm(user=request.user)
     return render(request, 'add_project.html', {'form': form})
 
 
