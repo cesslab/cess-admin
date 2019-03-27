@@ -1,5 +1,13 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% block css %}
+    {{ form.media.css }}
+{% endblock %}
+{% block js %}
+    {{ form.media.js }}
+{% endblock %}
+
+
 
 {% block title %}
     Add Project
