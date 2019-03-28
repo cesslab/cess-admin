@@ -13,6 +13,7 @@ Projects
             <tr>
                 <th>Name</th>
                 <th>Members</th>
+                <th>IRB Approved</th>
             </tr>
             </thead>
             <tbody>
@@ -24,6 +25,7 @@ Projects
                             {{ u.username }}{% if not forloop.last %}, {% endif %}
                         {% endfor %}
                     </td>
+                    <td>{{ p.approved }}</td>
                 </tr>
             {% endfor %}
             </tbody>
