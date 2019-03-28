@@ -6,7 +6,7 @@ from .models import Project
 
 @login_required
 def projects(request):
-    project_list = Project.objects.all()
+    project_list = Project.objects.filter(collaborators__in=[request.user.id])
     return render(request, 'projects.html', {'projects': project_list})
 
 
