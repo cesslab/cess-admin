@@ -141,10 +141,19 @@ LOGIN_REDIRECT_URL = 'projects_home'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+# --------------------------------
+# Crispy Templates
+# --------------------------------
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+# --------------------------------
+# Django Extensions
+# --------------------------------
 SHELL_PLUS = "ipython"
 
+# --------------------------------
+# Debug Toolbar
+# --------------------------------
 DEBUG_TOOLBAR_PANELS = [
     'debug_toolbar.panels.versions.VersionsPanel',
     'debug_toolbar.panels.timer.TimerPanel',
@@ -169,7 +178,9 @@ DEBUG_TOOLBAR_CONFIG = {
     'SHOW_TOOLBAR_CALLBACK': show_toolbar
 }
 
-
+# --------------------------------
+# Django Allauth
+# --------------------------------
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
@@ -179,3 +190,5 @@ AUTHENTICATION_BACKENDS = (
 )
 
 SITE_ID = 1
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
