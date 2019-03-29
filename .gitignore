@@ -161,11 +161,7 @@ Temporary Items
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff
-cadmin/.idea/
-cadmin/.idea/
-cadmin/.idea/
-cadmin/.idea/
-cadmin/.idea/
+./cadmin/.idea/
 
 # File-based project format
 *.iws
