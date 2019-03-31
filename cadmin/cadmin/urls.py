@@ -17,7 +17,6 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
 from .views import home
-from profiles.views import signup
 
 urlpatterns = [
     path('', home, name='home'),

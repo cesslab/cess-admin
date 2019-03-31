@@ -135,11 +135,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-AUTH_USER_MODEL = 'profiles.User'
-
 LOGIN_REDIRECT_URL = 'projects_home'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# --------------------------------
+# Custom User
+# --------------------------------
+AUTH_USER_MODEL = 'profiles.User'
 
 # --------------------------------
 # Crispy Templates
@@ -192,3 +194,6 @@ AUTHENTICATION_BACKENDS = (
 SITE_ID = 1
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_FORMS = {
+    'signup': 'profiles.forms.CustomSignupForm'
+}

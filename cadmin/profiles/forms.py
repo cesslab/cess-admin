@@ -1,10 +1,16 @@
-from django.contrib.auth.forms import UserCreationForm
+from allauth.account.forms import SignupForm
+from django import forms
 
-from .models import User
 
+class CustomSignupForm(SignupForm):
+    first_name = forms.CharField(max_length=50, label='First Name')
+    last_name = forms.CharField(max_length=50, label='Last Name')
+    department = forms.CharField(max_length=50, label='Last Name')
 
-class CustomUserCreationForm(UserCreationForm):
+    def signup(self, request, user):
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+        user.department = self.cleaned_data['department']
+        user.save()
+        return user
 
-    class Meta(UserCreationForm.Meta):
-        model = User
-        fields = UserCreationForm.Meta.fields + ('email', 'first_name', 'last_name')
