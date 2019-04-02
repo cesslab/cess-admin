@@ -5,15 +5,23 @@ Projects
 {% endblock %}
 
 {% block content %}
-<h2>Projects</h2>
+    <div class="row">
+        <div class="col-sm">
+            <h2>Projects</h2>
+        </div>
+        <div class="col-sm">
+            <a class="" href=""><i class="material-icons">add</i> Add</a>
+        </div>
+    </div>
     <main>
     <div>
         <table class="table">
             <thead>
             <tr>
                 <th>Name</th>
-                <th>Members</th>
-                <th>IRB Approved</th>
+                <th>Collaborators</th>
+                <th>IRB Status</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -22,10 +30,17 @@ Projects
                     <td>{{ p.name }}</td>
                     <td>
                         {% for u in p.collaborators.all %}
-                            {{ u.username }}{% if not forloop.last %}, {% endif %}
+                            {% if u.id != user.id %}
+                                {{ u.full_name }}{% if not forloop.last %}, {% endif %}
+                            {% endif %}
                         {% endfor %}
                     </td>
-                    <td>{{ p.approved }}</td>
+                    {% if p.approved %}
+                        <td><span class="badge badge-success">Approved</span></td>
+                    {% else %}
+                        <td><span class="badge badge-danger">Pending</span></td>
+                    {% endif %}
+                    <td><a href="{% url 'edit_project' p.id %}"><i class="material-icons">edit</i></a></td>
                 </tr>
             {% endfor %}
             </tbody>

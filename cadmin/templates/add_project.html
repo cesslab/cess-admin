@@ -10,14 +10,14 @@
 
 
 {% block title %}
-    Add Project
+    {{ type }} Project
 {% endblock %}
 
 {% block content %}
-    <h2>Add Project</h2>
+    <h2>{{ type }} Project</h2>
     <form method="post">
     {% csrf_token %}
     {{ form|crispy }}
-    <button type="submit">Add Project</button>
+    <button type="submit">{{ type }}</button>
     </form>
 {% endblock %}
