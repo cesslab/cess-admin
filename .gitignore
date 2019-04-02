@@ -161,7 +161,7 @@ Temporary Items
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff
-./cadmin/.idea/
+cadmin/.idea/
 
 # File-based project format
 *.iws
@@ -170,13 +170,13 @@ Temporary Items
 out/
 
 # mpeltonen/sbt-idea plugin
-.idea_modules/
+cadmin/.idea_modules/
 
 # JIRA plugin
 atlassian-ide-plugin.xml
 
 # Cursive Clojure plugin
-.idea/replstate.xml
+cadmin/.idea/replstate.xml
 
 # Crashlytics plugin (for Android Studio and IntelliJ)
 com_crashlytics_export_strings.xml
@@ -185,10 +185,10 @@ crashlytics-build.properties
 fabric.properties
 
 # Editor-based Rest Client
-.idea/httpRequests
+cadmin/.idea/httpRequests
 
 # Android studio 3.1+ serialized cache file
-.idea/caches/build_file_checksums.ser
+cadmin/.idea/caches/build_file_checksums.ser
 
 ### PyCharm Patch ###
 # Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
@@ -199,7 +199,7 @@ fabric.properties
 # *.ipr
 
 # Sonarlint plugin
-.idea/sonarlint
+cadmin/.idea/sonarlint
 
 # End of https://www.gitignore.io/api/macos,django,pycharm
 cadmin/.idea/workspace.xml
