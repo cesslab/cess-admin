@@ -7,6 +7,7 @@ class Project(models.Model):
     description = models.TextField()
     approved = models.BooleanField(default=False)
     collaborators = models.ManyToManyField(User, related_name='projects', blank=True)
+    instructions = models.FileField(upload_to='project/instructions')
 
     def __str__(self):
         return self.name

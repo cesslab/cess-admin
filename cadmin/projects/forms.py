@@ -12,7 +12,7 @@ class ProjectForm(forms.ModelForm):
 
     class Meta:
         model = Project
-        fields = ['name', 'collaborators', 'description']
+        fields = ['name', 'collaborators', 'description', 'instructions']
         widgets = {'collaborators': Select2MultipleWidget()}
 
     @staticmethod

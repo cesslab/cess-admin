@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.core.files.storage import FileSystemStorage
 from .forms import ProjectForm
 from .models import Project
 
@@ -13,7 +14,7 @@ def projects(request):
 @login_required
 def add_project(request):
     if request.method == 'POST':
-        form = ProjectForm(request.POST, user=request.user)
+        form = ProjectForm(request.POST, request.FILES, user=request.user)
         if form.is_valid():
             # The project must be saved to the DB before adding the collaborator.
             project = form.save(commit=False)

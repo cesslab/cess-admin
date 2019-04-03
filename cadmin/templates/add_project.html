@@ -3,11 +3,6 @@
 {% block css %}
     {{ form.media.css }}
 {% endblock %}
-{% block js %}
-    {{ form.media.js }}
-{% endblock %}
-
-
 
 {% block title %}
     {{ type }} Project
@@ -15,9 +10,15 @@
 
 {% block content %}
     <h2>{{ type }} Project</h2>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form|crispy }}
-    <button type="submit">{{ type }}</button>
+        <div>
+            <button class="btn btn-dark" type="submit">{{ type }}</button>
+        </div>
     </form>
+{% endblock %}
+
+{% block js %}
+    {{ form.media.js }}
 {% endblock %}
