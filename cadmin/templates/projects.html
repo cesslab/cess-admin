@@ -7,10 +7,9 @@ Projects
 {% block content %}
     <div class="row">
         <div class="col-sm">
-            <h2>Projects</h2>
-        </div>
-        <div class="col-sm">
-            <a class="btn btn-success float-right" href="{% url 'add_project' %}"><i class="material-icons">add</i></a>
+            <h2><span>Projects</span>
+                <a class="badge badge-success" href="{% url 'add_project' %}"><i class="material-icons">add</i></a>
+            </h2>
         </div>
     </div>
     <main>
@@ -21,7 +20,8 @@ Projects
                 <th>Name</th>
                 <th>Collaborators</th>
                 <th>IRB Status</th>
-                <th></th>
+                <th>Instructions</th>
+                <th>Modify</th>
             </tr>
             </thead>
             <tbody>
@@ -38,9 +38,15 @@ Projects
                     {% if p.approved %}
                         <td><span class="badge badge-success">Approved</span></td>
                     {% else %}
-                        <td><span class="badge badge-danger">Pending</span></td>
+                        <td><span class="badge badge-warning">Pending</span></td>
                     {% endif %}
-                    <td><a href="{% url 'edit_project' p.id %}"><i class="material-icons">edit</i></a></td>
+                    <td>
+                        <a href="{{ p.instructions.url }}"><i class="material-icons left">attach_file</i></a>
+                    </td>
+                    <td>
+                        <a href="{% url 'edit_project' p.id %}"><i class="text-success material-icons">edit</i></a>
+                        <a href="{% url 'delete_project' p.id %}"><i class="text-danger material-icons">delete</i></a>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>

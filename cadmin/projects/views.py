@@ -1,14 +1,22 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.core.files.storage import FileSystemStorage
 from .forms import ProjectForm
 from .models import Project
 
 
 @login_required
-def projects(request):
-    project_list = Project.objects.filter(collaborators__in=[request.user.id])
-    return render(request, 'projects.html', {'projects': project_list})
+def project_list(request):
+    projects = request.user.projects.all()
+    return render(request, 'projects.html', {'projects': projects})
+
+
+@login_required
+def delete_project(request, id):
+    project = get_object_or_404(Project, id=id)
+    if request.method == 'POST':
+        project.delete()
+        return redirect('projects_home')
+    return render(request, 'project_delete.html')
 
 
 @login_required
@@ -16,9 +24,12 @@ def add_project(request):
     if request.method == 'POST':
         form = ProjectForm(request.POST, request.FILES, user=request.user)
         if form.is_valid():
-            # The project must be saved to the DB before adding the collaborator.
             project = form.save(commit=False)
+            # Save the project first
             project.save()
+            # save collaborators listed, not including this user
+            form.save_m2m()
+            # add this user to the list of collaborators
             project.collaborators.add(request.user)
             project.save()
             return redirect('projects_home')
@@ -33,6 +44,12 @@ def edit_project(request, id):
         form = ProjectForm(request.POST, user=request.user, instance=project)
         if form.is_valid():
             project = form.save(commit=False)
+            # Save the project first
+            project.save()
+            # save collaborators listed, not including this user
+            form.save_m2m()
+            # add this user to the list of collaborators
+            project.collaborators.add(request.user)
             project.save()
             return redirect('projects_home')
     form = ProjectForm(user=request.user, instance=project)
