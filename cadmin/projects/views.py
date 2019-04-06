@@ -5,13 +5,13 @@ from .models import Project
 
 
 @login_required
-def project_list(request):
+def project_list_view(request):
     projects = request.user.projects.all()
     return render(request, 'projects.html', {'projects': projects})
 
 
 @login_required
-def delete_project(request, id):
+def project_delete_view(request, id):
     project = get_object_or_404(Project, id=id)
     if request.method == 'POST':
         project.delete()
@@ -20,7 +20,7 @@ def delete_project(request, id):
 
 
 @login_required
-def add_project(request):
+def project_add_view(request):
     if request.method == 'POST':
         form = ProjectForm(request.POST, request.FILES, user=request.user)
         if form.is_valid():
@@ -38,7 +38,7 @@ def add_project(request):
 
 
 @login_required
-def edit_project(request, id):
+def project_edit_view(request, id):
     project = get_object_or_404(Project, id=id)
     if request.method == 'POST':
         form = ProjectForm(request.POST, user=request.user, instance=project)
