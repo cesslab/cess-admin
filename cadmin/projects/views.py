@@ -6,8 +6,11 @@ from django.views.generic import ListView
 
 
 class ProjectListView(ListView):
-    queryset = Project.objects.all()
     template_name = 'projects.html'
+
+    def get_queryset(self):
+        print(self.request.user.projects.all())
+        return self.request.user.projects.all()
 
 
 @login_required

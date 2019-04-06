@@ -25,7 +25,7 @@ Projects
             </tr>
             </thead>
             <tbody>
-            {% for p in projects %}
+            {% for p in object_list %}
                 <tr>
                     <td>{{ p.name }}</td>
                     <td>
@@ -44,8 +44,8 @@ Projects
                         <a href="{{ p.instructions.url }}"><i class="material-icons left">attach_file</i></a>
                     </td>
                     <td>
-                        <a href="{% url 'edit_project' p.id %}"><i class="text-success material-icons">edit</i></a>
-                        <a href="{% url 'delete_project' p.id %}"><i class="text-danger material-icons">delete</i></a>
+                        <a href="{% url 'projects:project-edit' p.id %}"><i class="text-success material-icons">edit</i></a>
+                        <a href="{% url 'projects:project-delete' p.id %}"><i class="text-danger material-icons">delete</i></a>
                     </td>
                 </tr>
             {% endfor %}
