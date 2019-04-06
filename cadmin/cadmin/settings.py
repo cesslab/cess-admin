@@ -135,7 +135,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = 'projects_home'
+LOGIN_REDIRECT_URL = 'projects:project-list'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # --------------------------------
