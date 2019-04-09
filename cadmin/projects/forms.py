@@ -12,8 +12,15 @@ class ProjectForm(forms.ModelForm):
 
     class Meta:
         model = Project
-        fields = ['name', 'collaborators', 'description', 'instructions']
+        fields = ['name', 'collaborators', 'description', 'approved', 'instructions']
         widgets = {'collaborators': Select2MultipleWidget()}
+
+        def __init__(self, *args, **kwargs):
+            user = kwargs.pop('user')
+            super(Project, self).__init__(*args, **kwargs)
+            if not user.is_irbadmin:
+                del self.fields['approved']
+
 
     @staticmethod
     def label_from_instance(obj: User):
