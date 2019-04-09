@@ -10,6 +10,8 @@ class Project(models.Model):
     approved = models.BooleanField(default=False)
     collaborators = models.ManyToManyField(User, related_name='projects', blank=True)
     instructions = models.FileField(upload_to='project/instructions')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
