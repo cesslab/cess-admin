@@ -3,20 +3,15 @@ from django.contrib.auth.decorators import login_required
 from .forms import ProjectForm
 from .models import Project
 from django.views.generic import ListView
+from django.utils. decorators import method_decorator
 
 
+@method_decorator(login_required, name='dispatch')
 class ProjectListView(ListView):
     template_name = 'projects.html'
 
     def get_queryset(self):
-        print(self.request.user.projects.all())
-        return self.request.user.projects.all()
-
-
-@login_required
-def project_list_view(request):
-    projects = request.user.projects.all()
-    return render(request, 'projects.html', {'projects': projects})
+        return self.request.user.pi_projects.all() | self.request.user.ra_projects.all()
 
 
 @login_required
@@ -31,18 +26,15 @@ def project_delete_view(request, id):
 @login_required
 def project_add_view(request):
     if request.method == 'POST':
-        form = ProjectForm(request.POST, request.FILES, user=request.user)
+        form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
             project = form.save(commit=False)
             # Save the project first
             project.save()
             # save collaborators listed, not including this user
             form.save_m2m()
-            # add this user to the list of collaborators
-            project.collaborators.add(request.user)
-            project.save()
             return redirect('projects:project-list')
-    form = ProjectForm(user=request.user)
+    form = ProjectForm()
     return render(request, 'add_project.html', {'form': form, 'type': 'Add'})
 
 

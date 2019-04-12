@@ -7,11 +7,21 @@ from django.dispatch import receiver
 class Project(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
-    approved = models.BooleanField(default=False)
-    collaborators = models.ManyToManyField(User, related_name='projects', blank=True)
+    primary_investigators = models.ManyToManyField(User, related_name="pi_projects", blank=True)
+    research_assistants = models.ManyToManyField(User, related_name="ra_projects", blank=True)
+    has_irb_cert = models.BooleanField()
+    external_irb_approval = models.BooleanField()
+    protocol = models.CharField(max_length=255)
     instructions = models.FileField(upload_to='project/instructions')
+    is_no_deception = models.BooleanField()
+    has_grant_funding = models.BooleanField()
+    grant_agency = models.CharField(max_length=255)
+    grant_funds_released = models.DateField()
+    alt_source_funding = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    # Admin Fields
+    approved = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name

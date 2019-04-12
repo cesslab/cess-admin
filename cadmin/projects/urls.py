@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import project_list_view, project_add_view, project_edit_view, project_delete_view, ProjectListView
+from .views import project_add_view, project_edit_view, project_delete_view, ProjectListView
 
 app_name = 'projects'
 urlpatterns = [

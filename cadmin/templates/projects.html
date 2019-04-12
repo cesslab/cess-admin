@@ -18,7 +18,8 @@ Projects
             <thead>
             <tr>
                 <th>Name</th>
-                <th>Collaborators</th>
+                <th>Primary Investigators</th>
+                <th>Research Assistants</th>
                 <th>IRB Status</th>
                 <th>Instructions</th>
                 <th>Modify</th>
@@ -29,10 +30,13 @@ Projects
                 <tr>
                     <td>{{ p.name }}</td>
                     <td>
-                        {% for u in p.collaborators.all %}
-                            {% if u.id != user.id %}
-                                {{ u.full_name }}{% if not forloop.last %}, {% endif %}
-                            {% endif %}
+                        {% for u in p.primary_investigators.all %}
+                            {{ u.full_name }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for u in p.research_assistants.all %}
+                            {{ u.full_name }}{% if not forloop.last %}, {% endif %}
                         {% endfor %}
                     </td>
                     {% if p.approved %}
