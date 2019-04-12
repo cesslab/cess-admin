@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block title %}
-    {{ type }} Project
+    Create A New Project
 {% endblock %}
 
 {% block content %}
-    <h2>{{ type }} Project</h2>
+    <h2>New Project</h2>
     <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form|crispy }}
