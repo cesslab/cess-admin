@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     # Dev
     'debug_toolbar',
     'django_extensions',
+    # Storage
+    'storages',
 ]
 
 MIDDLEWARE = [
