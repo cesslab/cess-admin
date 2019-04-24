@@ -45,9 +45,9 @@ Projects
                         <td><span class="badge badge-warning">Pending</span></td>
                     {% endif %}
                     <td>
-                        <a href="{{ p.instructions.url }}"><i class="material-icons left">attach_file</i></a>
                     </td>
                     <td>
+                        <a href="{{ p.instructions.url }}"><i class="material-icons left">attach_file</i></a>
                         <a href="{% url 'projects:project-edit' p.id %}"><i class="text-success material-icons">edit</i></a>
                         <a href="{% url 'projects:project-delete' p.id %}"><i class="text-danger material-icons">delete</i></a>
                     </td>
