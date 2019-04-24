@@ -17,13 +17,14 @@ from .views import home
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', home, name='home'),
     path('projects/', include('projects.urls', namespace='projects')),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
     import debug_toolbar
