@@ -1,5 +1,5 @@
-.content {
-    padding-top: 1.5rem;
+main > .container {
+  padding: 80px 15px 0;
 }
 
 .material-icons {
