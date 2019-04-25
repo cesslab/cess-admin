@@ -1,5 +1,5 @@
 from django import forms
-from .models import Project, User
+from .models import Project, User, FileItem
 from django_select2.forms import Select2MultipleWidget
 
 
@@ -25,7 +25,13 @@ class ProjectForm(forms.ModelForm):
             if not user.is_irbadmin:
                 del self.fields['approved']
 
-
     @staticmethod
     def label_from_instance(obj: User):
         return obj.full_name()
+
+
+class FileItemForm(forms.ModelForm):
+    class Meta:
+        model = FileItem
+        fields = ['file']
+

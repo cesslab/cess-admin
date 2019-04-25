@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block css %}
+    {{ form.media.css }}
+{% endblock %}
+
+{% block title %}
+    Upload a Document
+{% endblock %}
+
+{% block content %}
+    <h2>Add a Document</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <div>
+            <button class="btn btn-dark" type="submit">Upload</button>
+        </div>
+    </form>
+{% endblock %}
+
+{% block js %}
+    {{ form.media.js }}
+{% endblock %}

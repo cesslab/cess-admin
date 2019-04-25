@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import ProjectForm
-from .models import Project
+from .forms import ProjectForm, FileItemForm
+from .models import Project, FileItem
 from django.views.generic import ListView
 from django.utils. decorators import method_decorator
+from django.conf import settings
 
 
 @method_decorator(login_required, name='dispatch')
@@ -23,10 +24,28 @@ def project_delete_view(request, id):
     return render(request, 'project_delete.html')
 
 
+def file_add(request):
+    if request.method == 'POST':
+        form = FileItemForm(request.POST, request.FILES)
+        if form.is_valid():
+            if settings.S3_ENABLED:
+                form.save()
+            else:
+                file = FileItem(file=request.FILES['file'])
+                file.save()
+            return redirect('projects:project-list')
+    form = FileItemForm()
+    return render(request, 'file_add.html', {'form': form})
+
+
+
+
+
+
 @login_required
 def project_add_view(request):
     if request.method == 'POST':
-        form = ProjectForm(request.POST, request.FILES)
+        form = ProjectForm(request.POST)
         if form.is_valid():
             project = form.save(commit=False)
             # Save the project first
@@ -35,7 +54,7 @@ def project_add_view(request):
             form.save_m2m()
             return redirect('projects:project-list')
     form = ProjectForm()
-    return render(request, 'add_project.html', {'form': form, 'type': 'Add'})
+    return render(request, 'project_add.html', {'form': form, 'type': 'Add'})
 
 
 @login_required
