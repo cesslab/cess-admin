@@ -209,30 +209,30 @@ ACCOUNT_FORMS = {
 # --------------------------------
 # Amazon s3
 # --------------------------------
-USE_ENABLED = os.environ.get('S3_ENABLED', False)
-if USE_ENABLED:
-    # AWS settings
+S3_ENABLED = os.environ.get('S3_ENABLED', False)
+if S3_ENABLED:
+    # AWS and s3 settings
+    AWS_DEFAULT_ACL = None
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
-    AWS_DEFAULT_ACL = None
+    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
-    # S3 settings
-    AWS_LOCATION = 'static'
-    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-    AWS_S3_OBJECT_PARAMETERS = {
-        'CacheControl': 'max-age=86400',
-    }
-    STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+    # s3 file settings
+    STATIC_FILE_LOCATION = 'static'
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_FILE_LOCATION}/'
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+    # S3 media settings
+    STATIC_MEDIA_LOCATION = 'media'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_MEDIA_LOCATION}/'
+    DEFAULT_FILE_STORAGE = 'cadmin.storage_backends.PublicMediaStorage'
 else:
-    STATIC_URL = '/static/'
+    STATIC_URL = '/staticfiles/'
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    MEDIA_URL = '/mediafiles/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 
-DEFAULT_FILE_STORAGE = 'cadmin.storage_backends.MediaStorage'
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
