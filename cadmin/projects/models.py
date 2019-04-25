@@ -26,11 +26,9 @@ class Project(models.Model):
         return self.name
 
 
-class ExperimentInstructions(models.Model):
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    upload = models.FileField()
+class FileItem(models.Model):
+    file = models.FileField()
     uploaded_at = models.DateTimeField(auto_now_add=True)
-
 
 
 @receiver(post_delete, sender=Project)
