@@ -27,6 +27,7 @@ class Project(models.Model):
 
 
 class FileItem(models.Model):
+    project = models.ForeignKey(Project, related_name='files', on_delete=models.CASCADE)
     file = models.FileField()
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
