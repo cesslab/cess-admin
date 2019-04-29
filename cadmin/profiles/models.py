@@ -19,6 +19,7 @@ class User(AbstractUser):
 class ResearcherProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     department = models.CharField(max_length=255)
+    has_irb_cert = models.BooleanField(default=False)
 
 
 @receiver(post_save, sender=User)
