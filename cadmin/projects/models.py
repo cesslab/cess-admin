@@ -9,7 +9,7 @@ class Project(models.Model):
     description = models.TextField()
     primary_investigators = models.ManyToManyField(User, related_name="pi_projects", blank=True)
     research_assistants = models.ManyToManyField(User, related_name="ra_projects", blank=True)
-    # has_irb_cert = models.BooleanField()
+    # admin editable
     # external_irb_approval = models.BooleanField()
     # protocol = models.CharField(max_length=255)
     # is_no_deception = models.BooleanField()
