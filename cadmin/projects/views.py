@@ -74,4 +74,4 @@ def project_edit_view(request, id):
             project.save()
             return redirect('projects:project-list')
     form = ProjectForm(user=request.user, instance=project)
-    return render(request, 'add_project.html', {'form': form, 'type': 'Update'})
+    return render(request, 'project_add.html', {'form': form, 'type': 'Update'})
