@@ -15,6 +15,7 @@
     {{ form|crispy }}
         <div>
             <button class="btn btn-dark" type="submit">{{ type }}</button>
+            <a class="btn btn-danger" href="{% url 'projects:project-list' %}">Cancel</a>
         </div>
     </form>
 {% endblock %}
