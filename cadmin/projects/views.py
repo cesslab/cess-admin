@@ -12,7 +12,10 @@ class ProjectListView(ListView):
     template_name = 'projects.html'
 
     def get_queryset(self):
-        return self.request.user.pi_projects.all() | self.request.user.ra_projects.all()
+        if self.request.user.is_irbadmin:
+            return Project.objects.all()
+        else:
+            return self.request.user.pi_projects.all() | self.request.user.ra_projects.all()
 
 
 @login_required
