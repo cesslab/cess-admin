@@ -32,6 +32,6 @@ class FileItem(models.Model):
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
 
-@receiver(post_delete, sender=Project)
-def submission_delete(sender, instance, **kwargs):
-    instance.file.delete(False)
+@receiver(post_delete, sender=FileItem)
+def remove_file_from_s3(sender, instance, **kwargs):
+    instance.file.delete(save=False)
