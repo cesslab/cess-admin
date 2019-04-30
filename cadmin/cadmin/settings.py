@@ -148,6 +148,7 @@ AUTH_USER_MODEL = 'profiles.User'
 # Crispy Templates
 # --------------------------------
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_FAIL_SILENTLY = not DEBUG
 
 # --------------------------------
 # Django Extensions
