@@ -9,7 +9,7 @@ from django.conf import settings
 
 @method_decorator(login_required, name='dispatch')
 class ProjectListView(ListView):
-    template_name = 'projects.html'
+    template_name = 'project/list.html'
 
     def get_queryset(self):
         if self.request.user.is_irbadmin:
@@ -24,7 +24,7 @@ def project_delete_view(request, id):
     if request.method == 'POST':
         project.delete()
         return redirect('projects:project-list')
-    return render(request, 'project_delete.html')
+    return render(request, 'project/delete.html')
 
 
 @login_required
@@ -43,7 +43,7 @@ def file_add(request, id):
                 file.save()
             return redirect('projects:project-list')
     form = FileItemForm()
-    return render(request, 'file_add.html', {'form': form})
+    return render(request, 'project/add_file_item.html', {'form': form})
 
 
 @login_required
@@ -58,7 +58,7 @@ def project_add_view(request):
             form.save_m2m()
             return redirect('projects:project-list')
     form = ProjectForm(user=request.user)
-    return render(request, 'project_add.html', {'form': form, 'type': 'Add'})
+    return render(request, 'project/add.html', {'form': form, 'type': 'Add'})
 
 
 @login_required
@@ -72,9 +72,14 @@ def project_edit_view(request, id):
             project.save()
             # save collaborators listed, not including this user
             form.save_m2m()
-            # add this user to the list of collaborators
-            project.collaborators.add(request.user)
-            project.save()
+            pi = project.primary_investigators.filter(id=request.user.id).exists()
+            ra = project.research_assistants.filter(id=request.user.id).exists()
+            # Add this user to the PI list if they didn't specify their role in this project
+            if not (pi or ra):
+                project.primary_investigators.add(request.user)
+                project.save()
             return redirect('projects:project-list')
+        else:
+            print(form.errors)
     form = ProjectForm(user=request.user, instance=project)
-    return render(request, 'project_add.html', {'form': form, 'type': 'Update'})
+    return render(request, 'project/add.html', {'form': form, 'type': 'Update'})
