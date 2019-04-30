@@ -20,7 +20,10 @@ Projects
                 <th>Name</th>
                 <th>Primary Investigators</th>
                 <th>Research Assistants</th>
-                <th>IRB Status</th>
+                <th>IRB Approval Method</th>
+                {% if user.is_irbadmin %}
+                    <th>IRB Status</th>
+                {% endif %}
                 <th>Attached Files</th>
                 <th>Modify</th>
             </tr>
@@ -39,11 +42,14 @@ Projects
                             {{ u.full_name }}{% if not forloop.last %}, {% endif %}
                         {% endfor %}
                     </td>
-                    {% if p.approved %}
-                        <td><span class="badge badge-success">Approved</span></td>
-                    {% else %}
-                        <td><span class="badge badge-warning">Pending</span></td>
+                    {% if user.is_irbadmin %}
+                        <td>{{ p.get_irb_approval_method_display }}</td>
                     {% endif %}
+                        <td>
+                            <span class="badge badge-success">
+                                {% if p.approved %}Approved{% else %}Pending{% endif %}
+                            </span>
+                        </td>
                     <td>
                         {% for f in p.files.all %}
                             <a href="{{ f.file.url }}">{{ f.file.name }}</a>
