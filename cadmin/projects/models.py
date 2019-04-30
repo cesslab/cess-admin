@@ -5,14 +5,16 @@ from django.dispatch import receiver
 
 
 class Project(models.Model):
+    NYU = 'NYU'
+    CESS = 'CES'
+    EXTERNAL = 'EXT'
+    IRB_APPROVAL_CHOICES = ((NYU, 'NYU'), (CESS, 'CESS'), (EXTERNAL, 'External'))
     name = models.CharField(max_length=255)
     description = models.TextField()
     primary_investigators = models.ManyToManyField(User, related_name="pi_projects", blank=True)
     research_assistants = models.ManyToManyField(User, related_name="ra_projects", blank=True)
-    # admin editable
-    # external_irb_approval = models.BooleanField()
+    irb_approval_method = models.CharField(max_length=3, choices=IRB_APPROVAL_CHOICES, default=CESS)
     # protocol = models.CharField(max_length=255)
-    # is_no_deception = models.BooleanField()
     # has_grant_funding = models.BooleanField()
     # grant_agency = models.CharField(max_length=255)
     # grant_funds_released = models.DateField()
